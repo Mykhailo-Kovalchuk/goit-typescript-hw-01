@@ -31,8 +31,54 @@ const userTS2 = {
     name: "Ann",
     age: 30
 };
+// нові типи даних any i unknown
+// додаємо їх якщо не знаємо який тип даних має бути. (Фактично він вимикає типізацію)
+let footSize = 10;
+footSize = "M";
+footSize = "EU - 4";
+let lastName = "Smith";
+lastName = 12;
+// але enum через запис такий 
+var Sizes;
+(function (Sizes) {
+    Sizes["small"] = "small";
+    Sizes["medium"] = "medium";
+    Sizes["large"] = "large";
+})(Sizes || (Sizes = {}));
+const button = "large";
+const button2 = Sizes.medium; // Краще так, бо тоді менша ймовірність припущення помилок.
+// функції - треба робити типізацію як аргументів так і результату (return)
 function add(num1, num2) {
-    return num1 + num2;
+    return `${num1} + ${num2}`;
 }
 add(1, 1);
+// якщо функція нічого не повертає тоді не приписуємо типізації типу, додаємо :void до дужок - тоді TS розуміє що функція щось робить, але нічого не повертає
+function add2(num1, num2) {
+    console.log(`${num1} + ${num2}`);
+}
+add2(1, 1);
+function great(user2) {
+    console.log(`Hello ${user2.name}`);
+}
+function userConstruction(name, age, hobby) {
+    return { name, age, hobby };
+}
+const Car = {
+    color: 'red',
+    price: 1000,
+    currency: "UAH",
+    start(color) {
+        console.log('start' + this.color);
+    }
+};
+const userData = {
+    name: "Bobby",
+    age: 12
+};
+const adminData = {
+    name: "John",
+    age: 23,
+    role: "Admin"
+};
+// В реакті це все що вище використовується безперервно.
 //# sourceMappingURL=index.js.map
